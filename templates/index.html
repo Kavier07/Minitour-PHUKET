@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHUKET — The One-Day Escape | Cinematic Journal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F7F4EF',
+                        sand: '#EAE3D2',
+                        charcoal: '#1C1B1A',
+                        vintage: '#8C8275',
+                        gold: '#C5A059'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Sarabun"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F7F4EF; color: #1C1B1A; }
+        .img-cinematic { filter: grayscale(15%) contrast(95%); transition: filter 0.5s ease, transform 0.5s ease; }
+        .img-cinematic:hover { filter: grayscale(0%) contrast(100%); transform: scale(1.02); }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-gold selection:text-white">
+
+    <!-- Header Section -->
+    <header class="border-b border-vintage/20 py-12 px-6 text-center">
+        <p class="font-serif italic text-vintage text-sm tracking-widest uppercase mb-2">Volume 01 — Travel Edition</p>
+        <h1 class="font-serif text-4xl md:text-6xl tracking-tight text-charcoal font-semibold mb-4">PHUKET ONE DAY JOURNEY</h1>
+        <p class="text-xs md:text-sm tracking-[0.2em] uppercase text-vintage font-light">เส้นทางท่องเที่ยวเชิงสัมผัสบันทึกความทรงจำใน 1 วัน</p>
+    </header>
+
+    <!-- Intro Magazine Layout -->
+    <section class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-5 space-y-4">
+            <span class="text-gold font-serif italic text-lg">The Essence of Phuket</span>
+            <h2 class="font-serif text-3xl md:text-4xl text-charcoal leading-tight">สัมผัสเสน่ห์เกาะมุกแห่งอันดามัน ในมุมมองมินิมอลคลาสสิก</h2>
+            <p class="text-sm leading-relaxed text-vintage font-light">
+                ถ่ายทอดเรื่องราวการเดินทางในหนึ่งวันที่เรียบง่าย ทว่าเปี่ยมด้วยเอกลักษณ์อันมีคุณค่า ตั้งแต่มุมพักผ่อนสุดคลาสสิก ชายหาดรับลมทะเล ประวัติศาสตร์เมืองเก่า ไปจนถึงการจิบกาแฟยามบ่ายเหนือผืนน้ำ
+            </p>
+        </div>
+        <div class="md:col-span-7 relative">
+            <img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=80" alt="Phuket Landmark" class="w-full h-[400px] object-cover img-cinematic shadow-xl">
+            <div class="absolute -bottom-6 -left-6 bg-cream border border-vintage/30 p-4 hidden sm:block">
+                <p class="font-serif italic text-xs text-vintage">Curated Route — 6 Special Stops</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Grid Section -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        <div class="flex justify-between items-end border-b border-vintage/30 pb-4 mb-12">
+            <div>
+                <span class="text-xs uppercase tracking-widest text-vintage">ITINERARY</span>
+                <h3 class="font-serif text-2xl text-charcoal">จุดเช็คอินประจำทริป</h3>
+            </div>
+            <a href="#map-section" class="font-serif italic text-sm text-gold hover:underline">ไปยังแผนที่ &darr;</a>
+        </div>
+
+        <!-- Cards Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {% for item in locations %}
+            <article class="bg-white border border-vintage/15 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden mb-5">
+                        <img src="{{ item.image }}" alt="{{ item.name }}" class="w-full h-52 object-cover img-cinematic">
+                        <span class="absolute top-3 left-3 bg-charcoal text-cream text-[10px] font-serif px-2.5 py-1 tracking-widest uppercase">
+                            STOP 0{{ item.id }}
+                        </span>
+                    </div>
+                    <span class="text-[11px] font-light tracking-wider text-gold uppercase block mb-1">{{ item.category }}</span>
+                    <h4 class="font-serif text-xl text-charcoal font-semibold mb-3">{{ item.name }}</h4>
+                    <p class="text-xs leading-relaxed text-vintage font-light mb-6">
+                        {{ item.desc }}
+                    </p>
+                </div>
+                
+                <div class="pt-4 border-t border-vintage/10">
+                    <!-- ปุ่มข้อมูลเส้นทาง สำหรับ Google Maps แต่ละสถานที่ -->
+                    <a href="{{ item.gmaps_link }}" target="_blank" class="inline-flex items-center justify-between w-full text-xs font-serif tracking-widest uppercase text-charcoal hover:text-gold transition-colors py-2 border-b border-charcoal/20 hover:border-gold">
+                        <span>ข้อมูลเส้นทาง</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Map Section -->
+    <section id="map-section" class="max-w-6xl mx-auto px-6 py-16">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-xs uppercase tracking-widest text-gold block mb-2">Interactive Map</span>
+            <h3 class="font-serif text-3xl text-charcoal mb-4">เส้นทางแผนที่การเดินทาง</h3>
+            <p class="text-xs text-vintage font-light leading-relaxed">
+                เส้นทางทั้งหมดถูกเชื่อมโยงตามลำดับพิกัดสถานที่ สามารถเปิดดูข้อมูลนำทางหรือเลือกคลิกบน Marker เพื่อดูรายละเอียด
+            </p>
+        </div>
+
+        <!-- Folium Map Container -->
+        <div class="border-4 border-white shadow-2xl relative overflow-hidden bg-sand">
+            <div class="w-full h-[550px]">
+                {{ map_html | safe }}
+            </div>
+        </div>
+
+        <!-- Explore Route Button (Google Maps รวมทริป) -->
+        <div class="mt-8 text-center">
+            <a href="https://www.google.com/maps/dir/7.8737396,98.3844791/7.8686115,98.3959578/7.8671800,98.3994381/7.8715818,98.4144680/7.8804334,98.4259712/7.8293328,98.4061762/" 
+               target="_blank" 
+               class="inline-block bg-charcoal text-cream font-serif text-xs tracking-[0.2em] uppercase px-8 py-4 hover:bg-gold transition-colors shadow-lg">
+                Explore Route on Google Maps &nearr;
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-vintage/20 py-8 text-center text-xs text-vintage font-light">
+        <p>&copy; 2026 PHUKET MINI TOUR — CINEMATIC JOURNAL. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+</body>
+</html>
